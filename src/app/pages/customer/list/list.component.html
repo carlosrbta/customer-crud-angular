@@ -1,0 +1,33 @@
+<p>List Page</p>
+
+<a class="" routerLink="/customer/form">
+  Add
+</a>
+<br />
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>CPF</th>
+      <th>Phone</th>
+      <th>Birthday</th>
+      <th>Address</th>
+      <th>Car</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tr *ngFor="let customer of customerList">
+    <td>{{ customer.name }}</td>
+    <td>{{ customer.cpf | cpf }}</td>
+    <td>{{ customer.phone | phone }}</td>
+    <td>{{ customer.birthday }}</td>
+    <td>{{ customer.address }}</td>
+    <td>{{ customer.car.modelName }}</td>
+    <td>
+      <a class="" routerLink="/customer/form/{{ customer.id }}">
+        Edit
+      </a>
+    </td>
+  </tr>
+</table>
