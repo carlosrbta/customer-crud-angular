@@ -1,6 +1,11 @@
-<app-header></app-header>
+<app-header isMenuCollapsed="isMenuCollapsed"></app-header>
 <app-toast aria-live="polite" aria-atomic="true"></app-toast>
-<div class="container">
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
+
+<div class="container-fluid">
+  <div class="row">
+    <app-sidebar isMenuCollapsed="isMenuCollapsed"></app-sidebar>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

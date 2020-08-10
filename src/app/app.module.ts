@@ -23,6 +23,7 @@ import { ToastComponent } from './components/toast/toast.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TruncatePipe,
     ConfirmDialogComponent,
     ToastComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

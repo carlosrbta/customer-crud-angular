@@ -23,6 +23,7 @@ export class FormComponent implements OnInit {
   customerForm: FormGroup;
   submitted = false;
   mask = MaskUtils;
+  title: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +47,8 @@ export class FormComponent implements OnInit {
         this.toastService.showError('Error on load car brands.');
       }
     );
+
+    this.title = this.customerId ? 'Edit customer' : 'New customer';
 
     this.customer = this.customerService.getItem(this.customerId);
 
