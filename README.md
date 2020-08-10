@@ -1,6 +1,33 @@
-# RhizomTest
+# Customer App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
+The challenge will be to develop a web application for registering customers of a car store, using Angular, with simple data management (CRUD) performing data management in localstorage. The application must have the following features:
+
+## User Stories
+
+- [ ] Customer list screen;
+- [ ] Customer registration screen;
+- [ ] Customer editing screen (can be the same screen used for registration);
+- [ ] The possibility of removing a customer (through editing or the list itself);
+
+## Customer registration must contain the following information:
+
+- Name
+- CPF
+- Phone
+- Birthday
+- Address
+- Car brand
+- Car model
+
+Car brand and model must start from a pre-defined list, powered by this API public: https://deividfortuna.github.io/fipe/
+
+## Specifications expected from the project:
+
+- [ ] The registration and editing forms must undergo validation;
+- [ ] All fields specified above must be mandatory;
+- [ ] Fields with known standards must have specific validation (eg, CPF, valid birthday);
+- [ ] The implementation should contain automated unit and integration tests (e2e);
+- [ ] It is allowed to use any library that helps to implement the challenge;
 
 ## Development server
 
