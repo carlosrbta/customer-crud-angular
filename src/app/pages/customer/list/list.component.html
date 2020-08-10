@@ -5,7 +5,7 @@
 </a>
 <br />
 
-<table>
+<table class="table table-sm table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -21,13 +21,27 @@
     <td>{{ customer.name }}</td>
     <td>{{ customer.cpf | cpf }}</td>
     <td>{{ customer.phone | phone }}</td>
-    <td>{{ customer.birthday }}</td>
-    <td>{{ customer.address }}</td>
-    <td>{{ customer.car.modelName }}</td>
+    <td>{{ customer.birthday | date: "dd/MM/yyyy" }}</td>
+    <td>
+      <span title="{{ customer.address }}">
+        {{ customer.address | truncate: [20] }}
+      </span>
+    </td>
+    <td>
+      <span title="{{ customer.car.modelName }}">
+        {{ customer.car.modelName | truncate: [20] }}
+      </span>
+    </td>
     <td>
       <a class="" routerLink="/customer/form/{{ customer.id }}">
         Edit
       </a>
+      <button
+        class="btn btn-primary pull-right"
+        (click)="showDialog(customer.id)"
+      >
+        Show Dialog
+      </button>
     </td>
   </tr>
 </table>

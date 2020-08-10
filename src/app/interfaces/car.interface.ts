@@ -1,6 +1,7 @@
+import { BrandInterface } from './brand.interface';
+
 export interface CarInterface {
-  brandId: number;
-  brandName: string;
-  modelId: number;
-  modelName: string;
+  id: string;
+  name: string;
+  brand: BrandInterface;
 }

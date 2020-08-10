@@ -1,9 +1,119 @@
-<p>Form Page!</p>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h2>Angular 6 Reactive Form Validation</h2>
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+        />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Name is required</div>
+        </div>
+      </div>
 
-<div *ngIf="customerId">
-  <p>{{ customerId }}</p>
+      <div class="form-group">
+        <label>CPF</label>
+        <input
+          type="text"
+          formControlName="cpf"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.cpf.errors }"
+          [textMask]="mask.cpf"
+        />
+        <div *ngIf="submitted && f.cpf.errors" class="invalid-feedback">
+          <div *ngIf="f.cpf.errors.required">CPF is required</div>
+          <div *ngIf="f.cpf.errors.invalid">CPF is invalid</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input
+          type="text"
+          formControlName="phone"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+          [textMask]="mask.phone"
+        />
+        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+          <div *ngIf="f.phone.errors.required">Phone is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Birthday</label>
+        <input
+          type="text"
+          formControlName="birthday"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }"
+          [textMask]="mask.date"
+        />
+        <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
+          <div *ngIf="f.birthday.errors.required">Birthday is required</div>
+          <div *ngIf="f.birthday.errors.invalid">Birthday is invalid</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Address</label>
+        <input
+          type="text"
+          formControlName="address"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
+        />
+        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+          <div *ngIf="f.address.errors.required">Address is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Car Brand</label>
+        <select
+          formControlName="carBrand"
+          (change)="onChangeBrand($event.target.value)"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.carBrand.errors }"
+        >
+          <option
+            *ngFor="let brand of brands; let i = index"
+            [value]="brands[i].id"
+          >
+            {{ brands[i].name }}
+          </option>
+        </select>
+        <div *ngIf="submitted && f.carBrand.errors" class="invalid-feedback">
+          <div *ngIf="f.carBrand.errors.required">Address is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Car Model</label>
+        <select
+          formControlName="carModel"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.carModel.errors }"
+        >
+          <option
+            *ngFor="let model of models; let i = index"
+            [value]="models[i].id"
+          >
+            {{ models[i].name }}
+          </option>
+        </select>
+        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+          <div *ngIf="f.address.errors.required">Address is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary">Register</button>
+      </div>
+    </form>
+  </div>
 </div>
-
-<a class="" routerLink="/customer">
-  Back
-</a>
