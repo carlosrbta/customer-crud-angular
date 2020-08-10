@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { HostBinding, Component, OnInit, TemplateRef } from '@angular/core';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -10,9 +10,9 @@ import { ToastService } from '../../services/toast.service';
 export class ToastComponent implements OnInit {
   constructor(public toastService: ToastService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  isTemplate(toast) {
+  isTemplate(toast): boolean {
     return toast.textOrTpl instanceof TemplateRef;
   }
 }

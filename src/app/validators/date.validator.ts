@@ -1,7 +1,7 @@
 import { AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
 
-export function DateValidator(control: AbstractControl) {
+export function DateValidator(control: AbstractControl): any {
   const date = control.value;
 
   if (date && date && !moment(date, 'DD/MM/YYYY', true).isValid()) {

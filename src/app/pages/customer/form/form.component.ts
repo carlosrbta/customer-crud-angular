@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
   customerForm: FormGroup;
   submitted = false;
   mask = MaskUtils;
-  title: string = '';
+  title = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -35,9 +35,9 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params: Params) => (this.customerId = params['id'])
-    );
+    this.route.params.subscribe((params: Params) => {
+      this.customerId = params.id;
+    });
 
     this.fipeService.getBrands().subscribe(
       (data) => {
@@ -55,7 +55,9 @@ export class FormComponent implements OnInit {
     const selectedBrand = this.customer.car && this.customer.car.brand.id;
     const selectedModel = this.customer.car && this.customer.car.id;
 
-    if (selectedBrand) this.onChangeBrand(selectedBrand);
+    if (selectedBrand) {
+      this.onChangeBrand(selectedBrand);
+    }
 
     const birthday = this.customer.birthday
       ? moment(this.customer.birthday).format('DD/MM/YYYY')
@@ -72,14 +74,16 @@ export class FormComponent implements OnInit {
     });
   }
 
-  get f() {
+  get f(): any {
     return this.customerForm.controls;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
 
-    if (this.customerForm.invalid) return;
+    if (this.customerForm.invalid) {
+      return;
+    }
 
     const {
       address,
@@ -122,7 +126,7 @@ export class FormComponent implements OnInit {
     this.router.navigate(['/customer']);
   }
 
-  onChangeBrand(value) {
+  onChangeBrand(value): void {
     this.models = [];
 
     this.fipeService.getModel(value).subscribe(

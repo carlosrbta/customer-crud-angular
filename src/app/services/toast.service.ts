@@ -6,22 +6,22 @@ import { Injectable, TemplateRef } from '@angular/core';
 export class ToastService {
   toasts: any[] = [];
 
-  show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
+  show(textOrTpl: string | TemplateRef<any>, options: any = {}): void {
     this.toasts.push({ textOrTpl, ...options });
   }
 
-  remove(toast) {
+  remove(toast): void {
     this.toasts = this.toasts.filter((t) => t !== toast);
   }
 
-  showSuccess(textOrTpl: string | TemplateRef<any>, options: any = {}) {
+  showSuccess(textOrTpl: string | TemplateRef<any>, options: any = {}): void {
     this.show(textOrTpl, {
       ...options,
       classname: 'bg-success text-light',
     });
   }
 
-  showError(textOrTpl: string | TemplateRef<any>, options: any = {}) {
+  showError(textOrTpl: string | TemplateRef<any>, options: any = {}): void {
     this.show(textOrTpl, {
       ...options,
       classname: 'bg-danger text-light',

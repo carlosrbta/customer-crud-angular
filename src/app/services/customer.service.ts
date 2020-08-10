@@ -17,37 +17,37 @@ export class CustomerService {
       this.storageService.getData(customerStorageKey) || customers;
   }
 
-  getItems() {
+  getItems(): CustomerInterface[] {
     return this.customerList;
   }
 
-  saveItems() {
+  saveItems(): void {
     this.storageService.setData(customerStorageKey, this.customerList);
   }
 
-  getItem(itemId) {
+  getItem(itemId): CustomerInterface {
     const item = this.customerList.find((e) => e.id === Number(itemId));
-    return item || {};
+    return item;
   }
 
-  addItem(item: CustomerInterface) {
+  addItem(item: CustomerInterface): void {
     this.customerList.push(item);
     this.saveItems();
   }
 
-  updateItem(itemId, item: CustomerInterface) {
+  updateItem(itemId, item: CustomerInterface): void {
     const index = this.customerList.findIndex((e) => e.id === Number(itemId));
     this.customerList[index] = { ...item };
     this.saveItems();
   }
 
-  deleteItem(itemId) {
+  deleteItem(itemId): void {
     const index = this.customerList.indexOf(itemId);
     this.customerList.splice(index, 1);
     this.saveItems();
   }
 
-  nextItemId() {
+  nextItemId(): number {
     const maxValue = _.maxBy(this.customerList, (o) => o.id);
     return maxValue ? maxValue.id + 1 : 1;
   }

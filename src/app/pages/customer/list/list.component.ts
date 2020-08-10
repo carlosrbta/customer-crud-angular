@@ -30,7 +30,7 @@ export class ListComponent implements OnInit {
     this.customerList = this.customerService.getItems();
   }
 
-  showDialog(customerId) {
+  showDialog(customerId): void {
     this.confirmDialogService
       .confirm('Remove customer', 'Do you really want to remove this customer?')
       .then((confirmed) => {
