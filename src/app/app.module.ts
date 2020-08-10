@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 
 import { PhonePipe } from './pipes/phone.pipe';
 import { CpfPipe } from './pipes/cpf.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 import { StorageService } from './services/storage.service';
 
@@ -17,10 +18,11 @@ import { FormComponent } from './pages/customer/form/form.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { TruncatePipe } from './pipes/truncate.pipe';
+import { ToastComponent } from './components/toast/toast.component';
 
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     TruncatePipe,
     ConfirmDialogComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +44,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     TextMaskModule,
     NgbModule,
+    FontAwesomeModule,
   ],
   providers: [StorageService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, ToastComponent],
 })
 export class AppModule {}

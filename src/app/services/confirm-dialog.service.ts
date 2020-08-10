@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -16,7 +16,7 @@ export class ConfirmDialogService {
     message: string,
     btnOkText: string = 'Yes',
     btnCancelText: string = 'No',
-    dialogSize: 'lg'
+    dialogSize: string = 'xs'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(ConfirmDialogComponent, {
       size: dialogSize,

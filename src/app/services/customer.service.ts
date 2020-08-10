@@ -27,7 +27,7 @@ export class CustomerService {
 
   getItem(itemId) {
     const item = this.customerList.find((e) => e.id === Number(itemId));
-    return item;
+    return item || {};
   }
 
   addItem(item: CustomerInterface) {

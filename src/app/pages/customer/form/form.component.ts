@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CustomerService } from '../../../services/customer.service';
 import { FipeService } from '../../../services/fipe.service';
+import { ToastService } from '../../../services/toast.service';
 import { CustomerInterface } from '../../../interfaces/customer.interface';
 import { CpfValidator } from '../../../validators/cpf.validator';
 import { DateValidator } from '../../../validators/date.validator';
@@ -15,14 +16,12 @@ import * as moment from 'moment';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  customer: CustomerInterface;
+  customer: any = {};
   brands = [];
   models = [];
   customerId = null;
-
   customerForm: FormGroup;
   submitted = false;
-
   mask = MaskUtils;
 
   constructor(
@@ -30,7 +29,8 @@ export class FormComponent implements OnInit {
     private router: Router,
     private customerService: CustomerService,
     private fipeService: FipeService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -43,14 +43,14 @@ export class FormComponent implements OnInit {
         this.brands = data.map((m) => ({ id: m.codigo, name: m.nome }));
       },
       (error) => {
-        console.log(error);
+        this.toastService.showError('Error on load car brands.');
       }
     );
 
     this.customer = this.customerService.getItem(this.customerId);
 
-    const selectedBrand = this.customer && this.customer.car.brand.id;
-    const selectedModel = this.customer && this.customer.car.id;
+    const selectedBrand = this.customer.car && this.customer.car.brand.id;
+    const selectedModel = this.customer.car && this.customer.car.id;
 
     if (selectedBrand) this.onChangeBrand(selectedBrand);
 
@@ -67,8 +67,6 @@ export class FormComponent implements OnInit {
       carBrand: [selectedBrand, Validators.required],
       carModel: [selectedModel, Validators.required],
     });
-
-    console.log();
   }
 
   get f() {
@@ -76,12 +74,10 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.customerForm);
     this.submitted = true;
 
-    if (this.customerForm.invalid) {
-      // return;
-    }
+    if (this.customerForm.invalid) return;
+
     const {
       address,
       birthday,
@@ -96,28 +92,36 @@ export class FormComponent implements OnInit {
 
     const customer: CustomerInterface = {
       address,
-      birthday: moment(birthday, 'DD/MM/YYYY').toDate(),
       cpf,
       name,
       phone,
+      id: Number(id),
+      birthday: moment(birthday, 'DD/MM/YYYY').toDate(),
       car: {
-        ...this.models.find((e) => e.id === carModel),
-        brand: this.brands.find((e) => e.id === carBrand),
+        ...this.models.find(
+          (e) => e.id === carModel || e.id === Number(carModel)
+        ),
+        brand: this.brands.find(
+          (e) => e.id === carBrand || e.id === Number(carBrand)
+        ),
       },
-      id,
     };
 
-    if (this.customerId) {
-      this.customerService.updateItem(id, customer);
-    } else {
-      this.customerService.addItem(customer);
-    }
+    const msg = this.customerId
+      ? 'Customer updated successfully!'
+      : 'Customer saved successfully!';
 
+    this.customerId
+      ? this.customerService.updateItem(id, customer)
+      : this.customerService.addItem(customer);
+
+    this.toastService.showSuccess(msg);
     this.router.navigate(['/customer']);
   }
 
   onChangeBrand(value) {
     this.models = [];
+
     this.fipeService.getModel(value).subscribe(
       (data) => {
         this.models = data.modelos.map((m) => ({
@@ -126,7 +130,7 @@ export class FormComponent implements OnInit {
         }));
       },
       (error) => {
-        console.log(error);
+        this.toastService.showError('Error on load car models.');
       }
     );
   }
