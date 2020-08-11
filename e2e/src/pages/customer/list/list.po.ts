@@ -1,23 +1,31 @@
 import { browser, element, by } from 'protractor';
 
 export class CustomerListComponent {
-  navigateTo(): void {
+  navigateTo(): any {
     return browser.get('/customer');
   }
 
-  getHeadingText(): void {
+  getHeadingText(): any {
     return element(by.css('app-list h1')).getText();
   }
 
-  getTableList(): void {
+  getTableList(): any {
     return element(by.css('.customer-list'));
   }
 
-  getTableRowEditButton(): void {
+  getTableRows(): any {
+    return element.all(by.css('.customer-list tbody tr'));
+  }
+
+  getTableRowEditButton(): any {
     return element.all(by.css('.customer-list tbody tr td a'));
   }
 
-  getTableRowRemoveButton(): void {
+  getTableRowRemoveButton(): any {
     return element.all(by.css('.customer-list tbody tr td button'));
+  }
+
+  getConfirmRemoveButton(): any {
+    return element.all(by.css('app-confirm-dialog .btn-primary'));
   }
 }

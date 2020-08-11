@@ -1,27 +1,51 @@
 import { browser, element, by } from 'protractor';
 
 export class CustomerFormComponent {
-  navigateTo(): void {
+  navigateTo(): any {
     return browser.get('/customer/form');
   }
 
-  getHeadingText(): void {
+  getHeadingText(): any {
     return element(by.css('app-form h1')).getText();
   }
 
-  getSubmitButton(): void {
+  getSubmitButton(): any {
     return element(by.buttonText('Save'));
   }
 
-  getForm(): void {
+  getForm(): any {
     return element(by.css('app-form form'));
   }
 
-  getCpfInput(): void {
+  getNameInput(): any {
+    return element(by.css('input[formControlName=name]'));
+  }
+
+  getCpfInput(): any {
     return element(by.css('input[formControlName=cpf]'));
   }
 
-  getBirthdayInput(): void {
+  getPhoneInput(): any {
+    return element(by.css('input[formControlName=phone]'));
+  }
+
+  getBirthdayInput(): any {
     return element(by.css('input[formControlName=birthday]'));
+  }
+
+  getAddressInput(): any {
+    return element(by.css('input[formControlName=address]'));
+  }
+
+  getFirstBrandSelect(): any {
+    return element(by.css('select[formControlName=carBrand]')).element(
+      by.css('option[value="1"]')
+    );
+  }
+
+  getFirstModelSelect(): any {
+    return element(by.css('select[formControlName=carModel]')).element(
+      by.css('option[value="1"]')
+    );
   }
 }
