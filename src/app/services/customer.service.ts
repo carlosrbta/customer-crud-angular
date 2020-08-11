@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CustomerInterface } from '../interfaces/customer.interface';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { StorageService } from './storage.service';
 import { customers } from '../data/customers';
@@ -27,7 +27,7 @@ export class CustomerService {
     this.storageService.setData(customerStorageKey, this.customerList);
   }
 
-  getItem(itemId) {
+  getItem(itemId): Observable<CustomerInterface> {
     const item = this.customerList.find((e) => e.id === Number(itemId));
     return of<CustomerInterface>(item);
   }

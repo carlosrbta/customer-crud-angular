@@ -62,6 +62,10 @@ export class CustomerFormComponent implements OnInit {
       carModel: ['', Validators.required],
     });
 
+    if (!this.customerId) {
+      return;
+    }
+
     this.customerService
       .getItem(this.customerId)
       .subscribe(async (customer) => {
