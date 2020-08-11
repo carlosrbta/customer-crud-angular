@@ -1,7 +1,7 @@
 import { CustomerListComponent } from './list.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project CustomerListComponent', () => {
+describe('Customer List Component', () => {
   let listPage: CustomerListComponent;
 
   beforeEach(() => {

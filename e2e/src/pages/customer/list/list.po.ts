@@ -16,4 +16,8 @@ export class CustomerListComponent {
   getTableRowEditButton() {
     return element.all(by.css('.customer-list tbody tr td a'));
   }
+
+  getTableRowRemoveButton() {
+    return element.all(by.css('.customer-list tbody tr td button'));
+  }
 }
