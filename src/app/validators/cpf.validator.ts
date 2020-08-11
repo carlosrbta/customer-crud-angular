@@ -1,47 +1,64 @@
 import { AbstractControl } from '@angular/forms';
 
-export function CpfValidator(control: AbstractControl): any {
-  let sum = 0;
-  let rest;
-  let valid;
+function isValidCPF(val) {
+  let cpf = val.trim();
 
-  const value = `${control.value}`;
-  const cpf = (value || '').replace(/\D/g, '');
-  const regex = new RegExp('[0-9]{11}');
+  cpf = cpf.replace(/\./g, '');
+  cpf = cpf.replace('-', '');
+  cpf = cpf.split('');
 
-  if (!regex.test(cpf)) {
-    valid = false;
-  } else {
-    for (let i = 1; i <= 9; i++) {
-      sum = sum + parseInt(cpf.substring(i - 1, i), 10) * (11 - i);
-    }
-    rest = (sum * 10) % 11;
+  let v1 = 0;
+  let v2 = 0;
+  let aux = false;
 
-    if (rest === 10 || rest === 11) {
-      rest = 0;
+  for (let i = 1; cpf.length > i; i++) {
+    if (cpf[i - 1] != cpf[i]) {
+      aux = true;
     }
-    if (rest !== parseInt(cpf.substring(9, 10), 10)) {
-      valid = false;
-    }
-
-    sum = 0;
-    for (let i = 1; i <= 10; i++) {
-      sum = sum + parseInt(cpf.substring(i - 1, i), 10) * (12 - i);
-    }
-    rest = (sum * 10) % 11;
-
-    if (rest === 10 || rest === 11) {
-      rest = 0;
-    }
-    if (rest !== parseInt(cpf.substring(10, 11), 10)) {
-      valid = false;
-    }
-    valid = true;
   }
 
-  if (!valid && value) {
+  if (aux == false) {
+    return false;
+  }
+
+  for (let i = 0, p = 10; cpf.length - 2 > i; i++, p--) {
+    v1 += cpf[i] * p;
+  }
+
+  v1 = (v1 * 10) % 11;
+
+  if (v1 == 10) {
+    v1 = 0;
+  }
+
+  if (v1 != cpf[9]) {
+    return false;
+  }
+
+  for (let i = 0, p = 11; cpf.length - 1 > i; i++, p--) {
+    v2 += cpf[i] * p;
+  }
+
+  v2 = (v2 * 10) % 11;
+
+  if (v2 == 10) {
+    v2 = 0;
+  }
+
+  if (v2 != cpf[10]) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+export function CpfValidator(control: AbstractControl): any {
+  const value = `${control.value}`;
+
+  let valid = isValidCPF(value || '');
+
+  if (!valid) {
     return { invalid: true };
   }
-
   return null;
 }
