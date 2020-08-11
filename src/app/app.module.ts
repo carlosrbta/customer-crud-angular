@@ -12,8 +12,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 
 import { StorageService } from './services/storage.service';
 
-import { ListComponent } from './pages/customer/list/list.component';
-import { FormComponent } from './pages/customer/form/form.component';
+import { CustomerListComponent } from './pages/customer/list/list.component';
+import { CustomerFormComponent } from './pages/customer/form/form.component';
 
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -28,8 +28,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent,
-    FormComponent,
+    CustomerListComponent,
+    CustomerFormComponent,
     PhonePipe,
     CpfPipe,
     HeaderComponent,

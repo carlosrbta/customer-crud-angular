@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ListComponent } from './pages/customer/list/list.component';
-import { FormComponent } from './pages/customer/form/form.component';
+import { CustomerListComponent } from './pages/customer/list/list.component';
+import { CustomerFormComponent } from './pages/customer/form/form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'customer', pathMatch: 'full' },
-  { path: 'customer', component: ListComponent },
-  { path: 'customer/form', component: FormComponent },
-  { path: 'customer/form/:id', component: FormComponent },
+  { path: 'customer', component: CustomerListComponent },
+  { path: 'customer/form', component: CustomerFormComponent },
+  { path: 'customer/form/:id', component: CustomerFormComponent },
 ];
 
 @NgModule({

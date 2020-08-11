@@ -1,20 +1,20 @@
-import { ListComponent } from './list.po';
+import { CustomerListComponent } from './list.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project ListComponent', () => {
-  let page: ListComponent;
+describe('workspace-project CustomerListComponent', () => {
+  let listPage: CustomerListComponent;
 
   beforeEach(() => {
-    page = new ListComponent();
-    page.navigateTo();
+    listPage = new CustomerListComponent();
+    listPage.navigateTo();
   });
 
   it('Heading text should be Customer', () => {
-    expect(page.getHeadingText()).toEqual('Customer');
+    expect(listPage.getHeadingText()).toEqual('Customer');
   });
 
   it('Customer list table shoud be present', () => {
-    expect(page.getHeadingText()).toEqual('Customer');
-    expect(page.getTableList().isPresent()).toBe(true);
+    expect(listPage.getHeadingText()).toEqual('Customer');
+    expect(listPage.getTableList().isPresent()).toBe(true);
   });
 });

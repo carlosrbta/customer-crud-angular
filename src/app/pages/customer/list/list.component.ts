@@ -10,7 +10,7 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit {
+export class CustomerListComponent implements OnInit {
   customerList: CustomerInterface[];
 
   faPen = faPen;

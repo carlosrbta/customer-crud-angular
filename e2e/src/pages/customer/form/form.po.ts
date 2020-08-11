@@ -1,16 +1,8 @@
 import { browser, element, by } from 'protractor';
 
-export class FormComponent {
-  navigateToList() {
-    return browser.get('/customer');
-  }
-
-  navigateToForm() {
+export class CustomerFormComponent {
+  navigateTo() {
     return browser.get('/customer/form');
-  }
-
-  getTableRowEditButton() {
-    return element.all(by.css('.customer-list tbody tr td a'));
   }
 
   getHeadingText() {

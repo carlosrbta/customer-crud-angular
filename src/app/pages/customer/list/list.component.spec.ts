@@ -3,20 +3,20 @@ import { PhonePipe } from '../../../pipes/phone.pipe';
 import { CpfPipe } from '../../../pipes/cpf.pipe';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 
-import { ListComponent } from './list.component';
+import { CustomerListComponent } from './list.component';
 
-describe('ListComponent', () => {
-  let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
+describe('CustomerListComponent', () => {
+  let component: CustomerListComponent;
+  let fixture: ComponentFixture<CustomerListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ListComponent, TruncatePipe, CpfPipe, PhonePipe],
+      declarations: [CustomerListComponent, TruncatePipe, CpfPipe, PhonePipe],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListComponent);
+    fixture = TestBed.createComponent(CustomerListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

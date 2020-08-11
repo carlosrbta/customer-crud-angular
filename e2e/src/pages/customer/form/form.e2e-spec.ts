@@ -1,23 +1,25 @@
-import { FormComponent } from './form.po';
 import { browser, logging } from 'protractor';
+import { CustomerFormComponent } from './form.po';
+import { CustomerListComponent } from '../list/list.po';
 
-describe('workspace-project FormComponent', () => {
-  let page: FormComponent;
+describe('workspace-project CustomerFormComponent', () => {
+  let formPage: CustomerFormComponent;
+  let listPage: CustomerListComponent;
 
   beforeEach(() => {
-    page = new FormComponent();
-    page.navigateToList();
+    formPage = new CustomerFormComponent();
+    listPage = new CustomerListComponent();
+    formPage.navigateTo();
   });
 
   it('Heading text for new costumer should be New customer', () => {
-    page.navigateToForm();
-    expect(page.getHeadingText()).toEqual('New customer');
+    expect(formPage.getHeadingText()).toEqual('New customer');
   });
 
   it('Heading text for editing costumer should be Edit customer', () => {
-    page.navigateToList();
-    page.getTableRowEditButton().first().click();
+    listPage.navigateTo();
+    listPage.getTableRowEditButton().first().click();
 
-    expect(page.getHeadingText()).toEqual('Edit customer');
+    expect(formPage.getHeadingText()).toEqual('Edit customer');
   });
 });
