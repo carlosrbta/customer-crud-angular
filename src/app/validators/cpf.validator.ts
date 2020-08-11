@@ -60,8 +60,6 @@ export function CpfValidator(control: AbstractControl): any {
 
   const valid = isValidCPF(value.replace(/\D/g, ''));
 
-  console.log(`valid`, valid);
-
   if (!valid) {
     return { invalid: true };
   }
