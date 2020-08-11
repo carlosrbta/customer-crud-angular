@@ -8,8 +8,8 @@ describe('TruncatePipe', () => {
 
   it('Truncate text[10] "Rua Francisco Celestino de Medeiros" to "Rua Franci..."', () => {
     const pipe = new TruncatePipe();
+    const args = [10];
 
-    let args = [10];
     expect(pipe.transform('Rua Francisco Celestino de Medeiros', args)).toBe(
       'Rua Franci...'
     );

@@ -1,27 +1,27 @@
 import { browser, element, by } from 'protractor';
 
 export class CustomerFormComponent {
-  navigateTo() {
+  navigateTo(): void {
     return browser.get('/customer/form');
   }
 
-  getHeadingText() {
+  getHeadingText(): void {
     return element(by.css('app-form h1')).getText();
   }
 
-  getSubmitButton() {
+  getSubmitButton(): void {
     return element(by.buttonText('Save'));
   }
 
-  getForm() {
+  getForm(): void {
     return element(by.css('app-form form'));
   }
 
-  getCpfInput() {
+  getCpfInput(): void {
     return element(by.css('input[formControlName=cpf]'));
   }
 
-  getBirthdayInput() {
+  getBirthdayInput(): void {
     return element(by.css('input[formControlName=birthday]'));
   }
 }

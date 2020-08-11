@@ -1,6 +1,6 @@
 import { AbstractControl } from '@angular/forms';
 
-function isValidCPF(val) {
+function isValidCPF(val): boolean {
   let cpf = val.trim();
 
   cpf = cpf.replace(/\./g, '');
@@ -12,12 +12,12 @@ function isValidCPF(val) {
   let aux = false;
 
   for (let i = 1; cpf.length > i; i++) {
-    if (cpf[i - 1] != cpf[i]) {
+    if (cpf[i - 1] !== cpf[i]) {
       aux = true;
     }
   }
 
-  if (aux == false) {
+  if (aux === false) {
     return false;
   }
 
@@ -27,11 +27,11 @@ function isValidCPF(val) {
 
   v1 = (v1 * 10) % 11;
 
-  if (v1 == 10) {
+  if (v1 === 10) {
     v1 = 0;
   }
 
-  if (v1 != cpf[9]) {
+  if (v1 !== cpf[9]) {
     return false;
   }
 
@@ -41,11 +41,11 @@ function isValidCPF(val) {
 
   v2 = (v2 * 10) % 11;
 
-  if (v2 == 10) {
+  if (v2 === 10) {
     v2 = 0;
   }
 
-  if (v2 != cpf[10]) {
+  if (v2 !== cpf[10]) {
     return false;
   } else {
     return true;
@@ -55,7 +55,11 @@ function isValidCPF(val) {
 export function CpfValidator(control: AbstractControl): any {
   const value = `${control.value}`;
 
-  let valid = isValidCPF(value || '');
+  if (!control.value) {
+    return null;
+  }
+
+  const valid = isValidCPF(value || '');
 
   if (!valid) {
     return { invalid: true };
