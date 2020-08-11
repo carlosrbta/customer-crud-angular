@@ -8,6 +8,8 @@ import { CustomerInterface } from '../../../interfaces/customer.interface';
 import { CpfValidator } from '../../../validators/cpf.validator';
 import { DateValidator } from '../../../validators/date.validator';
 import { MaskUtils } from '../../../utils/mask.utils';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -16,7 +18,7 @@ import * as moment from 'moment';
   styleUrls: ['./form.component.scss'],
 })
 export class CustomerFormComponent implements OnInit {
-  customer: any = {};
+  customer: Observable<CustomerInterface>;
   brands = [];
   models = [];
   customerId = null;
@@ -50,33 +52,31 @@ export class CustomerFormComponent implements OnInit {
 
     this.title = this.customerId ? 'Edit customer' : 'New customer';
 
-    this.customer = this.customerService.getItem(this.customerId);
-
-    let selectedBrand = null;
-    let selectedModel = null;
-    let birthday = '';
-
-    if (this.customer) {
-      selectedBrand = this.customer.car && this.customer.car.brand.id;
-      selectedModel = this.customer.car && this.customer.car.id;
-      birthday =
-        this.customer.birthday &&
-        moment(this.customer.birthday).format('DD/MM/YYYY');
-    }
-
-    if (selectedBrand) {
-      this.onChangeBrand(selectedBrand);
-    }
-
     this.customerForm = this.formBuilder.group({
-      name: [this.customer?.name, Validators.required],
-      cpf: [this.customer?.cpf, [Validators.required, CpfValidator]],
-      phone: [this.customer?.phone, Validators.required],
-      birthday: [birthday, [Validators.required, DateValidator]],
-      address: [this.customer?.address, Validators.required],
-      carBrand: [selectedBrand, Validators.required],
-      carModel: [selectedModel, Validators.required],
+      name: ['', Validators.required],
+      cpf: ['', [Validators.required, CpfValidator]],
+      phone: ['', Validators.required],
+      birthday: ['', [Validators.required, DateValidator]],
+      address: ['', Validators.required],
+      carBrand: ['', Validators.required],
+      carModel: ['', Validators.required],
     });
+
+    this.customerService
+      .getItem(this.customerId)
+      .subscribe(async (customer) => {
+        await this.onChangeBrand(customer.car.brand.id);
+
+        this.customerForm.patchValue({
+          name: customer.name,
+          cpf: customer.cpf,
+          phone: customer.phone,
+          birthday: moment(customer.birthday).format('DD/MM/YYYY'),
+          address: customer.address,
+          carBrand: customer.car.brand.id,
+          carModel: customer.car.id,
+        });
+      });
   }
 
   get f(): any {
@@ -104,9 +104,9 @@ export class CustomerFormComponent implements OnInit {
 
     const customer: CustomerInterface = {
       address,
-      cpf,
       name,
-      phone,
+      cpf: cpf.replace(/\D/g, ''),
+      phone: phone.replace(/\D/g, ''),
       id: Number(id),
       birthday: moment(birthday, 'DD/MM/YYYY').toDate(),
       car: {

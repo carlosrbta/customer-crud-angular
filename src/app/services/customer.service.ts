@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CustomerInterface } from '../interfaces/customer.interface';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { StorageService } from './storage.service';
 import { customers } from '../data/customers';
 import * as _ from 'lodash';
@@ -25,9 +27,9 @@ export class CustomerService {
     this.storageService.setData(customerStorageKey, this.customerList);
   }
 
-  getItem(itemId): CustomerInterface {
+  getItem(itemId) {
     const item = this.customerList.find((e) => e.id === Number(itemId));
-    return item;
+    return of<CustomerInterface>(item);
   }
 
   addItem(item: CustomerInterface): void {

@@ -5,8 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CpfPipe implements PipeTransform {
   transform(value: string, args: any[]): string {
-    if (`${value}`.length === 11) {
-      return `${value}`.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '$1.$2.$3-$4');
+    const cpf = `${value}`.replace(/\D/g, '');
+
+    if (cpf.length === 11) {
+      return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '$1.$2.$3-$4');
     }
     return 'Invalid cpf';
   }
