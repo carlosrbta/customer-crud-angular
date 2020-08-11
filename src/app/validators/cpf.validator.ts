@@ -1,55 +1,54 @@
 import { AbstractControl } from '@angular/forms';
 
-function isValidCPF(val): boolean {
-  let cpf = val.trim();
+function isValidCPF(cpf): boolean {
+  let soma = 0;
+  let resto: number;
+  let valido: boolean;
 
-  cpf = cpf.replace(/\./g, '');
-  cpf = cpf.replace('-', '');
-  cpf = cpf.split('');
+  const regex = new RegExp('[0-9]{11}');
 
-  let v1 = 0;
-  let v2 = 0;
-  let aux = false;
-
-  for (let i = 1; cpf.length > i; i++) {
-    if (cpf[i - 1] !== cpf[i]) {
-      aux = true;
-    }
-  }
-
-  if (aux === false) {
-    return false;
-  }
-
-  for (let i = 0, p = 10; cpf.length - 2 > i; i++, p--) {
-    v1 += cpf[i] * p;
-  }
-
-  v1 = (v1 * 10) % 11;
-
-  if (v1 === 10) {
-    v1 = 0;
-  }
-
-  if (v1 !== cpf[9]) {
-    return false;
-  }
-
-  for (let i = 0, p = 11; cpf.length - 1 > i; i++, p--) {
-    v2 += cpf[i] * p;
-  }
-
-  v2 = (v2 * 10) % 11;
-
-  if (v2 === 10) {
-    v2 = 0;
-  }
-
-  if (v2 !== cpf[10]) {
-    return false;
+  if (
+    cpf === '00000000000' ||
+    cpf === '11111111111' ||
+    cpf === '22222222222' ||
+    cpf === '33333333333' ||
+    cpf === '44444444444' ||
+    cpf === '55555555555' ||
+    cpf === '66666666666' ||
+    cpf === '77777777777' ||
+    cpf === '88888888888' ||
+    cpf === '99999999999' ||
+    !regex.test(cpf)
+  ) {
+    valido = false;
   } else {
-    return true;
+    for (let i = 1; i <= 9; i++) {
+      soma = soma + parseInt(cpf.substring(i - 1, i), 10) * (11 - i);
+    }
+    resto = (soma * 10) % 11;
+
+    if (resto === 10 || resto === 11) {
+      resto = 0;
+    }
+    if (resto !== parseInt(cpf.substring(9, 10), 10)) {
+      valido = false;
+    }
+
+    soma = 0;
+    for (let i = 1; i <= 10; i++) {
+      soma = soma + parseInt(cpf.substring(i - 1, i), 10) * (12 - i);
+    }
+    resto = (soma * 10) % 11;
+
+    if (resto === 10 || resto === 11) {
+      resto = 0;
+    }
+    if (resto !== parseInt(cpf.substring(10, 11), 10)) {
+      valido = false;
+    }
+    valido = true;
   }
+  return valido;
 }
 
 export function CpfValidator(control: AbstractControl): any {
@@ -59,7 +58,9 @@ export function CpfValidator(control: AbstractControl): any {
     return null;
   }
 
-  const valid = isValidCPF(value || '');
+  const valid = isValidCPF(value.replace(/\D/g, ''));
+
+  console.log(`valid`, valid);
 
   if (!valid) {
     return { invalid: true };
