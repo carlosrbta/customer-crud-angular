@@ -1,4 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  NgbActiveModal,
+  NgbModal,
+  NgbModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 import { ConfirmDialogComponent } from './confirm-dialog.component';
 
@@ -8,9 +13,10 @@ describe('ConfirmDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [ConfirmDialogComponent],
+      imports: [NgbModule],
+      providers: [NgbActiveModal, NgbModal],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

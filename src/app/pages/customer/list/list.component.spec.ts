@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { PhonePipe } from '../../../pipes/phone.pipe';
+import { CpfPipe } from '../../../pipes/cpf.pipe';
+import { TruncatePipe } from '../../../pipes/truncate.pipe';
 
 import { ListComponent } from './list.component';
 
@@ -8,9 +11,8 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListComponent ]
-    })
-    .compileComponents();
+      declarations: [ListComponent, TruncatePipe, CpfPipe, PhonePipe],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

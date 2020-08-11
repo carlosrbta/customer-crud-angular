@@ -8,9 +8,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [HeaderComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +20,13 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it(`should have as title 'Company name'`, () => {
+    const fixture = TestBed.createComponent(HeaderComponent);
+    const component = fixture.componentInstance;
+
+    console.log(component.title);
+    expect(component.title).toEqual('Company name');
   });
 });

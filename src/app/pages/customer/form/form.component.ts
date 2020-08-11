@@ -52,23 +52,28 @@ export class FormComponent implements OnInit {
 
     this.customer = this.customerService.getItem(this.customerId);
 
-    const selectedBrand = this.customer.car && this.customer.car.brand.id;
-    const selectedModel = this.customer.car && this.customer.car.id;
+    let selectedBrand = null;
+    let selectedModel = null;
+    let birthday = '';
+
+    if (this.customer) {
+      selectedBrand = this.customer.car && this.customer.car.brand.id;
+      selectedModel = this.customer.car && this.customer.car.id;
+      birthday =
+        this.customer.birthday &&
+        moment(this.customer.birthday).format('DD/MM/YYYY');
+    }
 
     if (selectedBrand) {
       this.onChangeBrand(selectedBrand);
     }
 
-    const birthday = this.customer.birthday
-      ? moment(this.customer.birthday).format('DD/MM/YYYY')
-      : '';
-
     this.customerForm = this.formBuilder.group({
-      name: [this.customer.name, Validators.required],
-      cpf: [this.customer.cpf, [Validators.required, CpfValidator]],
-      phone: [this.customer.phone, Validators.required],
+      name: [this.customer?.name, Validators.required],
+      cpf: [this.customer?.cpf, [Validators.required, CpfValidator]],
+      phone: [this.customer?.phone, Validators.required],
       birthday: [birthday, [Validators.required, DateValidator]],
-      address: [this.customer.address, Validators.required],
+      address: [this.customer?.address, Validators.required],
       carBrand: [selectedBrand, Validators.required],
       carModel: [selectedModel, Validators.required],
     });

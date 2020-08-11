@@ -15,6 +15,7 @@ import { StorageService } from './services/storage.service';
 import { ListComponent } from './pages/customer/list/list.component';
 import { FormComponent } from './pages/customer/form/form.component';
 
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -23,7 +24,6 @@ import { ToastComponent } from './components/toast/toast.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
