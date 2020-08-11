@@ -1,4 +1,4 @@
-# Customer App
+# Customer CRUD App
 
 The challenge will be to develop a web application for registering customers of a car store, using Angular, with simple data management (CRUD) performing data management in localstorage. The application must have the following features:
 
